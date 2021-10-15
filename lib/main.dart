@@ -1,7 +1,9 @@
+import 'package:bwa_shamo/pages/home/main_page.dart';
 import 'package:bwa_shamo/pages/sign_in.dart';
+import 'package:bwa_shamo/pages/sign_up.dart';
 import 'package:bwa_shamo/pages/splash.dart';
 import 'package:flutter/material.dart';
-import 'theme.dart';
+// import 'theme.dart';
 
 void main() => runApp(MyApp());
 
@@ -16,7 +18,9 @@ class MyApp extends StatelessWidget {
       //konfigurasi routing page
       routes: {
         '/': (context) => SplashPage(),
-        '/sign-in': (context) => SignIn()
+        '/sign-in': (context) => SignIn(),
+        '/sign-up': (context) => SignUp(),
+        '/home': (context) => MainPage()
       },
 
       // home: SplashPage(),
