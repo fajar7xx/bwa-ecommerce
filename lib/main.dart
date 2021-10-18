@@ -1,3 +1,4 @@
+import 'package:bwa_shamo/pages/edit_profile.dart';
 import 'package:bwa_shamo/pages/home/main_page.dart';
 import 'package:bwa_shamo/pages/sign_in.dart';
 import 'package:bwa_shamo/pages/sign_up.dart';
@@ -20,7 +21,8 @@ class MyApp extends StatelessWidget {
         '/': (context) => SplashPage(),
         '/sign-in': (context) => SignIn(),
         '/sign-up': (context) => SignUp(),
-        '/home': (context) => MainPage()
+        '/home': (context) => MainPage(),
+        '/edit-profile': (context) => EditProfilePage(),
       },
 
       // home: SplashPage(),
