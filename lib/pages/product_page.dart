@@ -31,9 +31,72 @@ class _ProductPageState extends State<ProductPage> {
   ];
 
   int currentIndex = 0;
+  bool isWishlist = false;
 
   @override
   Widget build(BuildContext context) {
+    // membuat dialog modal success
+    Future<void> showSucessDialog() async {
+      return showDialog(
+          context: context,
+          builder: (BuildContext context) => Container(
+                //lebar modal dikurangi 2 kali margin
+                width: MediaQuery.of(context).size.width - (2 * defaultMargin),
+                child: AlertDialog(
+                  backgroundColor: bgColor3,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30)),
+                  content: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Align(
+                            alignment: Alignment.centerLeft,
+                            child: GestureDetector(
+                                onTap: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Icon(Icons.close, color: primaryColor))),
+                        Image.asset(
+                          'assets/icon_success.png',
+                          width: 100,
+                        ),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        Text(
+                          'Hurray :)',
+                          style: primaryTextStyle.copyWith(
+                              fontSize: 18, fontWeight: semiBold),
+                        ),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        Text('Item added successfulley',
+                            style: secondaryTextStyle),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Container(
+                          width: 154,
+                          height: 44,
+                          child: TextButton(
+                            onPressed: () {},
+                            style: TextButton.styleFrom(
+                                backgroundColor: primaryColor,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12))),
+                            child: Text('View my cart',
+                                style: primaryTextStyle.copyWith(
+                                    fontSize: 16, fontWeight: medium)),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ));
+    }
+
     // untuk membuat indicator slider
     Widget sliderIndicator(int index) {
       return Container(
@@ -140,9 +203,34 @@ class _ProductPageState extends State<ProductPage> {
                           style: subtitleTextStyle.copyWith(fontSize: 12))
                     ],
                   )),
-                  Image.asset(
-                    'assets/btn_whistlist.png',
-                    width: 46,
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        isWishlist = !isWishlist;
+                      });
+                      //membuat snackbar
+                      if (isWishlist) {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            backgroundColor: secondaryColor,
+                            content: Text(
+                              'Item has been added to the Wishlist',
+                              textAlign: TextAlign.center,
+                            )));
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            backgroundColor: alertColor,
+                            content: Text(
+                              'Item has been removed from the Wishlist',
+                              textAlign: TextAlign.center,
+                            )));
+                      }
+                    },
+                    child: Image.asset(
+                      isWishlist
+                          ? 'assets/btn_whistlist_ok.png'
+                          : 'assets/btn_whistlist.png',
+                      width: 46,
+                    ),
                   )
                 ],
               ),
@@ -231,12 +319,17 @@ class _ProductPageState extends State<ProductPage> {
               margin: EdgeInsets.all(defaultMargin),
               child: Row(
                 children: [
-                  Container(
-                      width: 54,
-                      height: 54,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage('assets/btn_chat.png')))),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/detail-chat');
+                    },
+                    child: Container(
+                        width: 54,
+                        height: 54,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage('assets/btn_chat.png')))),
+                  ),
                   SizedBox(
                     width: 16,
                   ),
@@ -244,7 +337,9 @@ class _ProductPageState extends State<ProductPage> {
                     child: Container(
                       height: 54,
                       child: TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            showSucessDialog();
+                          },
                           style: TextButton.styleFrom(
                             primary: primaryColor,
                             shape: RoundedRectangleBorder(
