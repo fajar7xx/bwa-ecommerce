@@ -1,3 +1,4 @@
+import 'package:bwa_shamo/pages/cart_page.dart';
 import 'package:bwa_shamo/pages/detail_chat_page.dart';
 import 'package:bwa_shamo/pages/edit_profile.dart';
 import 'package:bwa_shamo/pages/home/main_page.dart';
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
         '/detail-chat': (context) => DetailChat(),
         '/edit-profile': (context) => EditProfilePage(),
         '/product': (context) => ProductPage(),
+        '/cart': (context) => CartPage(),
       },
 
       // home: SplashPage(),
